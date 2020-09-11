@@ -1,9 +1,19 @@
 class RingBuffer:
     def __init__(self, capacity):
-        pass
+        self.capacity = capacity
+        self.list = []
+        self.current_removal = 0
 
     def append(self, item):
-        pass
+        if len(self.list) < self.capacity:
+            self.list.append(item)
+        elif len(self.list) == self.capacity:
+            self.list.pop(self.current_removal)
+            self.list.insert(self.current_removal, item)
+            if self.current_removal < self.capacity - 1:
+                self.current_removal += 1
+            else:
+                self.current_removal =  0
 
     def get(self):
-        pass
+        return self.list
